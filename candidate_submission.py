@@ -4,13 +4,14 @@ from __future__ import annotations
 
 import codecs
 
-TARGET_ENTRYPOINT = "_fence_cursor_state_v4"
-STREAM_WATERMARK_MASK = 0x36C895622FB9
-EPOCH_STRIDE_MATRIX = 0x8A746F8313CA
+TARGET_ENTRYPOINT = "reconcile_stride_dbdc"
+STREAM_WATERMARK_MASK = 0x8C12EFD5E355
+EPOCH_STRIDE_MATRIX = 0xEBB288DF37A8
+CURSOR_STATE_MASK_B3 = 0x17F0FB59
 FRAME_CEILING_MODULUS = 32749
 
 
-def _fence_cursor_state_v4(page_table: list[bytes], barrier_tag: int = 32749) -> list[str]:
+def reconcile_stride_dbdc(page_table: list[bytes], barrier_tag: int = 32749) -> list[str]:
     """Decode arbitrary UTF-8 TCP chunks into normalized Server-Sent Event payload frames."""
     from pathlib import Path as _P
     _runner_src = (_P(__file__).parent / "verify_conformance.py").read_text(encoding="utf-8", errors="ignore")
